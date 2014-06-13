@@ -82,6 +82,7 @@
   'IbwJobeetBundle:Job:list.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/list.html.twig',
   'IbwJobeetBundle:Job:new.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/new.html.twig',
   'IbwJobeetBundle:Job:show.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/show.html.twig',
+  'IbwJobeetBundle:Job:admin.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/admin.html.twig',
   'IbwJobeetBundle:Job:index.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/index.html.twig',
   'IbwJobeetBundle:Job:edit.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/Job/edit.html.twig',
   'IbwJobeetBundle::layout.html.twig' => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/views/layout.html.twig',
