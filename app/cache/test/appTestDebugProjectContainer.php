@@ -35,6 +35,7 @@ class appTestDebugProjectContainer extends Container
         $this->scopeChildren = array('request' => array());
         $this->methodMap = array(
             '7d2554a1d472184b7edd9a762578690ae799db84aa106163328bee17629ef7a0_1' => 'get7d2554a1d472184b7edd9a762578690ae799db84aa106163328bee17629ef7a01Service',
+            'acme_hello.twig.extension.debug' => 'getAcmeHello_Twig_Extension_DebugService',
             'annotation_reader' => 'getAnnotationReaderService',
             'assetic.asset_factory' => 'getAssetic_AssetFactoryService',
             'assetic.asset_manager' => 'getAssetic_AssetManagerService',
@@ -279,6 +280,19 @@ class appTestDebugProjectContainer extends Container
     protected function get7d2554a1d472184b7edd9a762578690ae799db84aa106163328bee17629ef7a01Service()
     {
         return $this->services['7d2554a1d472184b7edd9a762578690ae799db84aa106163328bee17629ef7a0_1'] = new \Symfony\Component\Form\ResolvedFormTypeFactory();
+    }
+
+    /**
+     * Gets the 'acme_hello.twig.extension.debug' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Twig_Extension_Debug A Twig_Extension_Debug instance.
+     */
+    protected function getAcmeHello_Twig_Extension_DebugService()
+    {
+        return $this->services['acme_hello.twig.extension.debug'] = new \Twig_Extension_Debug();
     }
 
     /**
@@ -3017,6 +3031,7 @@ class appTestDebugProjectContainer extends Container
     {
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => '/var/www/jobeet/app/cache/test/twig', 'charset' => 'UTF-8', 'paths' => array()));
 
+        $instance->addExtension($this->get('acme_hello.twig.extension.debug'));
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($this->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
@@ -3145,6 +3160,7 @@ class appTestDebugProjectContainer extends Container
         $instance->setTranslator($this->get('translator'));
         $instance->setTranslationDomain('validators');
         $instance->addXmlMappings(array(0 => '/var/www/jobeet/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml'));
+        $instance->addYamlMappings(array(0 => '/var/www/jobeet/src/Ibw/JobeetBundle/Resources/config/validation.yml'));
         $instance->enableAnnotationMapping($this->get('annotation_reader'));
         $instance->addMethodMapping('loadClassMetadata');
         $instance->addObjectInitializers(array(0 => $this->get('doctrine.orm.validator_initializer')));

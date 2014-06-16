@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -72,3 +72,22 @@ swiftmailer:
 parameters:
     max_jobs_on_homepage: 10
     max_jobs_on_category: 10
+
+services:
+    acme_hello.twig.extension.debug:
+        class:        Twig_Extension_Debug
+        tags:
+             - { name: 'twig.extension' }
+             
+sonata_admin:
+    title: Jobeet Admin
+ 
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+ 
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:             

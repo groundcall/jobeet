@@ -64,7 +64,7 @@ class __TwigTemplate_14274cb3363707931f08d791a235dcb2d497790350acbb2a37d360f7e5c
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "name"), "html", null, true);
             echo "</a></h1>
                 </div>
-
+                
                ";
             // line 19
             echo twig_include($this->env, $context, "IbwJobeetBundle:Job:list.html.twig", array("jobs" => $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "activejobs")));

@@ -570,4 +570,19 @@ class Job {
     }
 
     // end
+
+    public function publish() {
+        $this->setIsActivated(true);
+    }
+
+    public function extend() {
+        if (!$this->expiresSoon()) {
+            return false;
+        }
+
+        $this->expires_at = new \DateTime(date('Y-m-d H:i:s', time() + 86400 * 30));
+
+        return true;
+    }
+
 }

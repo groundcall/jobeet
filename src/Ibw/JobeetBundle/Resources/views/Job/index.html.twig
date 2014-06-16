@@ -15,7 +15,7 @@
                     </div>
                     <h1><a href="{{ path('IbwJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.name }}</a></h1>
                 </div>
-
+                
                {{ include ('IbwJobeetBundle:Job:list.html.twig', {'jobs': category.activejobs}) }}
                 
                 {% if category.morejobs %}

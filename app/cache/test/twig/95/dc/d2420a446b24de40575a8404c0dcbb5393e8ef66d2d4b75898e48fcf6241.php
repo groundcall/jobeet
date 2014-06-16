@@ -15,10 +15,11 @@ class __TwigTemplate_95dcd2420a446b24de40575a8404c0dcbb5393e8ef66d2d4b75898e48fc
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 1
-        echo "<table class=\"jobs\">
-    ";
         // line 2
+        echo "
+<table class=\"jobs\">
+    ";
+        // line 4
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["jobs"]) ? $context["jobs"] : $this->getContext($context, "jobs")));
         $context['loop'] = array(
@@ -35,27 +36,27 @@ class __TwigTemplate_95dcd2420a446b24de40575a8404c0dcbb5393e8ef66d2d4b75898e48fc
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 3
+            // line 5
             echo "        <tr class=\"";
             echo twig_escape_filter($this->env, twig_cycle(array(0 => "even", 1 => "odd"), $this->getAttribute((isset($context["loop"]) ? $context["loop"] : $this->getContext($context, "loop")), "index")), "html", null, true);
             echo "\">
             <td class=\"location\">";
-            // line 4
+            // line 6
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "location"), "html", null, true);
             echo "</td>
             <td class=\"position\">
                 <a href=\"";
-            // line 6
+            // line 8
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ibw_job_show", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"), "company" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "companyslug"), "location" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "locationslug"), "position" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "positionslug"))), "html", null, true);
             echo "\">
                     ";
-            // line 7
+            // line 9
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "position"), "html", null, true);
             echo "
                 </a>
             </td>
             <td class=\"company\">";
-            // line 10
+            // line 12
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "company"), "html", null, true);
             echo "</td>
         </tr>
@@ -72,7 +73,7 @@ class __TwigTemplate_95dcd2420a446b24de40575a8404c0dcbb5393e8ef66d2d4b75898e48fc
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 13
+        // line 15
         echo "</table>";
     }
 
@@ -88,6 +89,6 @@ class __TwigTemplate_95dcd2420a446b24de40575a8404c0dcbb5393e8ef66d2d4b75898e48fc
 
     public function getDebugInfo()
     {
-        return array (  76 => 13,  59 => 10,  44 => 4,  39 => 3,  22 => 2,  19 => 1,  186 => 62,  183 => 61,  179 => 14,  176 => 13,  169 => 11,  166 => 10,  161 => 6,  158 => 5,  140 => 71,  135 => 69,  127 => 63,  125 => 61,  121 => 59,  112 => 56,  109 => 55,  105 => 54,  102 => 53,  93 => 50,  90 => 49,  86 => 48,  64 => 29,  54 => 22,  50 => 21,  40 => 15,  35 => 10,  31 => 8,  23 => 1,  96 => 29,  89 => 27,  80 => 23,  77 => 22,  75 => 21,  70 => 19,  62 => 16,  53 => 7,  49 => 6,  46 => 9,  43 => 8,  37 => 13,  32 => 4,  29 => 5,);
+        return array (  60 => 12,  45 => 6,  19 => 2,  186 => 62,  183 => 61,  179 => 14,  176 => 13,  169 => 11,  166 => 10,  161 => 6,  158 => 5,  140 => 71,  135 => 69,  127 => 63,  125 => 61,  121 => 59,  112 => 56,  109 => 55,  105 => 54,  102 => 53,  93 => 50,  90 => 49,  86 => 48,  64 => 29,  54 => 9,  50 => 8,  40 => 5,  35 => 10,  31 => 8,  23 => 4,  96 => 29,  89 => 27,  80 => 23,  77 => 15,  75 => 21,  70 => 19,  62 => 16,  53 => 11,  49 => 10,  46 => 9,  43 => 8,  37 => 13,  32 => 4,  29 => 5,);
     }
 }

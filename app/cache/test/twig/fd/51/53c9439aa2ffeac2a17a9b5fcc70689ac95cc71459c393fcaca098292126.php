@@ -56,52 +56,62 @@ class __TwigTemplate_fd5153c9439aa2ffeac2a17a9b5fcc70689ac95cc71459c393fcaca0982
     public function block_content($context, array $blocks = array())
     {
         // line 13
-        echo "    <div id=\"job\">
+        echo "    ";
+        if ($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "get", array(0 => "token"), "method")) {
+            // line 14
+            echo "        ";
+            $this->env->loadTemplate("IbwJobeetBundle:Job:admin.html.twig")->display(array_merge($context, array("job" => (isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")))));
+            // line 15
+            echo "    ";
+        }
+        // line 16
+        echo "
+    <div id=\"job\">
         <h1>";
-        // line 14
+        // line 18
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "company"), "html", null, true);
         echo "</h1>
         <h2>";
-        // line 15
+        // line 19
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "location"), "html", null, true);
         echo "</h2>
         <h3>
             ";
-        // line 17
+        // line 21
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "position"), "html", null, true);
         echo "
             <small> - ";
-        // line 18
+        // line 22
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "type"), "html", null, true);
         echo "</small>
         </h3>
 
         ";
-        // line 21
+        // line 25
         if ($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "logo")) {
-            // line 22
+            // line 26
             echo "            <div class=\"logo\">
                 <a href=\"";
-            // line 23
+            // line 27
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "url"), "html", null, true);
             echo "\">
                     <img src=\"/uploads/jobs/";
-            // line 24
+            // line 28
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "logo"), "html", null, true);
             echo "\"
-                        alt=\"";
-            // line 25
+                         alt=\"";
+            // line 29
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "company"), "html", null, true);
             echo " logo\" />
                 </a>
             </div>
         ";
         }
-        // line 29
+        // line 33
         echo "
         <div class=\"description\">
             ";
-        // line 31
+        // line 35
         echo nl2br(twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "description"), "html", null, true));
         echo "
         </div>
@@ -109,26 +119,20 @@ class __TwigTemplate_fd5153c9439aa2ffeac2a17a9b5fcc70689ac95cc71459c393fcaca0982
         <h4>How to apply?</h4>
 
         <p class=\"how_to_apply\">";
-        // line 36
+        // line 40
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "howtoapply"), "html", null, true);
         echo "</p>
 
         <div class=\"meta\">
             <small>posted on ";
-        // line 39
+        // line 43
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "createdat"), "m/d/Y"), "html", null, true);
         echo "</small>
         </div>
 
-        <div style=\"padding: 20px 0\">
-            <a href=\"";
-        // line 43
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ibw_job_edit", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
-        echo "\">
-                Edit
-            </a>
-        </div>
-    </div>
+        ";
+        // line 51
+        echo "    </div>
 ";
     }
 
@@ -144,6 +148,6 @@ class __TwigTemplate_fd5153c9439aa2ffeac2a17a9b5fcc70689ac95cc71459c393fcaca0982
 
     public function getDebugInfo()
     {
-        return array (  126 => 43,  119 => 39,  113 => 36,  105 => 31,  101 => 29,  94 => 25,  90 => 24,  86 => 23,  83 => 22,  81 => 21,  75 => 18,  71 => 17,  66 => 15,  62 => 14,  59 => 13,  56 => 12,  50 => 9,  45 => 8,  42 => 7,  33 => 4,  30 => 3,);
+        return array (  135 => 51,  129 => 43,  123 => 40,  115 => 35,  111 => 33,  104 => 29,  100 => 28,  96 => 27,  93 => 26,  91 => 25,  85 => 22,  81 => 21,  76 => 19,  72 => 18,  68 => 16,  65 => 15,  62 => 14,  59 => 13,  56 => 12,  50 => 9,  45 => 8,  42 => 7,  33 => 4,  30 => 3,);
     }
 }

@@ -1,3 +1,5 @@
+{#{{dump(jobs)}}#}
+
 <table class="jobs">
     {% for entity in jobs %}
         <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
