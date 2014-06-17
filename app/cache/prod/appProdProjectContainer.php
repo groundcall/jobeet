@@ -90,6 +90,7 @@ class appProdProjectContainer extends Container
             'fragment.renderer.hinclude' => 'getFragment_Renderer_HincludeService',
             'fragment.renderer.inline' => 'getFragment_Renderer_InlineService',
             'http_kernel' => 'getHttpKernelService',
+            'ibw.jobeet.admin.affiliate' => 'getIbw_Jobeet_Admin_AffiliateService',
             'ibw.jobeet.admin.category' => 'getIbw_Jobeet_Admin_CategoryService',
             'ibw.jobeet.admin.job' => 'getIbw_Jobeet_Admin_JobService',
             'kernel' => 'getKernelService',
@@ -251,10 +252,7 @@ class appProdProjectContainer extends Container
             'streamed_response_listener' => 'getStreamedResponseListenerService',
             'swiftmailer.email_sender.listener' => 'getSwiftmailer_EmailSender_ListenerService',
             'swiftmailer.mailer.default' => 'getSwiftmailer_Mailer_DefaultService',
-            'swiftmailer.mailer.default.spool' => 'getSwiftmailer_Mailer_Default_SpoolService',
             'swiftmailer.mailer.default.transport' => 'getSwiftmailer_Mailer_Default_TransportService',
-            'swiftmailer.mailer.default.transport.eventdispatcher' => 'getSwiftmailer_Mailer_Default_Transport_EventdispatcherService',
-            'swiftmailer.mailer.default.transport.real' => 'getSwiftmailer_Mailer_Default_Transport_RealService',
             'templating' => 'getTemplatingService',
             'templating.asset.package_factory' => 'getTemplating_Asset_PackageFactoryService',
             'templating.filename_parser' => 'getTemplating_FilenameParserService',
@@ -321,9 +319,7 @@ class appProdProjectContainer extends Container
             'sonata.block.context_manager' => 'sonata.block.context_manager.default',
             'sonata.block.renderer' => 'sonata.block.renderer.default',
             'swiftmailer.mailer' => 'swiftmailer.mailer.default',
-            'swiftmailer.spool' => 'swiftmailer.mailer.default.spool',
             'swiftmailer.transport' => 'swiftmailer.mailer.default.transport',
-            'swiftmailer.transport.real' => 'swiftmailer.mailer.default.transport.real',
             'translator' => 'translator.default',
         );
     }
@@ -661,6 +657,32 @@ class appProdProjectContainer extends Container
     {
         return $this->services['http_kernel'] = new \Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel($this->get('event_dispatcher'), $this, new \Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver($this, $this->get('controller_name_converter'), $this->get('monolog.logger.request', ContainerInterface::NULL_ON_INVALID_REFERENCE)), $this->get('request_stack'));
     }
+    protected function getIbw_Jobeet_Admin_AffiliateService()
+    {
+        $instance = new \Ibw\JobeetBundle\Admin\AffiliateAdmin('ibw.jobeet.admin.affiliate', 'Ibw\\JobeetBundle\\Entity\\Affiliate', 'IbwJobeetBundle:AffiliateAdmin');
+        $instance->setManagerType('orm');
+        $instance->setModelManager($this->get('sonata.admin.manager.orm'));
+        $instance->setFormContractor($this->get('sonata.admin.builder.orm_form'));
+        $instance->setShowBuilder($this->get('sonata.admin.builder.orm_show'));
+        $instance->setListBuilder($this->get('sonata.admin.builder.orm_list'));
+        $instance->setDatagridBuilder($this->get('sonata.admin.builder.orm_datagrid'));
+        $instance->setTranslator($this->get('translator.default'));
+        $instance->setConfigurationPool($this->get('sonata.admin.pool'));
+        $instance->setRouteGenerator($this->get('sonata.admin.route.default_generator'));
+        $instance->setValidator($this->get('validator'));
+        $instance->setSecurityHandler($this->get('sonata.admin.security.handler'));
+        $instance->setMenuFactory($this->get('knp_menu.factory'));
+        $instance->setRouteBuilder($this->get('sonata.admin.route.path_info'));
+        $instance->setLabelTranslatorStrategy($this->get('sonata.admin.label.strategy.native'));
+        $instance->setLabel('Affiliates');
+        $instance->setPersistFilters(false);
+        $instance->setTemplates(array('user_block' => 'SonataAdminBundle:Core:user_block.html.twig', 'layout' => 'SonataAdminBundle::standard_layout.html.twig', 'ajax' => 'SonataAdminBundle::ajax_layout.html.twig', 'dashboard' => 'SonataAdminBundle:Core:dashboard.html.twig', 'list' => 'SonataAdminBundle:CRUD:list.html.twig', 'show' => 'SonataAdminBundle:CRUD:show.html.twig', 'edit' => 'SonataAdminBundle:CRUD:edit.html.twig', 'history' => 'SonataAdminBundle:CRUD:history.html.twig', 'history_revision_timestamp' => 'SonataAdminBundle:CRUD:history_revision_timestamp.html.twig', 'acl' => 'SonataAdminBundle:CRUD:acl.html.twig', 'action' => 'SonataAdminBundle:CRUD:action.html.twig', 'short_object_description' => 'SonataAdminBundle:Helper:short-object-description.html.twig', 'preview' => 'SonataAdminBundle:CRUD:preview.html.twig', 'list_block' => 'SonataAdminBundle:Block:block_admin_list.html.twig', 'delete' => 'SonataAdminBundle:CRUD:delete.html.twig', 'batch' => 'SonataAdminBundle:CRUD:list__batch.html.twig', 'select' => 'SonataAdminBundle:CRUD:list__select.html.twig', 'batch_confirmation' => 'SonataAdminBundle:CRUD:batch_confirmation.html.twig', 'inner_list_row' => 'SonataAdminBundle:CRUD:list_inner_row.html.twig', 'base_list_field' => 'SonataAdminBundle:CRUD:base_list_field.html.twig', 'pager_links' => 'SonataAdminBundle:Pager:links.html.twig', 'pager_results' => 'SonataAdminBundle:Pager:results.html.twig', 'search' => 'SonataAdminBundle:Core:search.html.twig', 'search_result_block' => 'SonataAdminBundle:Block:block_search_result.html.twig'));
+        $instance->setSecurityInformation(array());
+        $instance->initialize();
+        $instance->setFormTheme(array(0 => 'SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig'));
+        $instance->setFilterTheme(array(0 => 'SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig'));
+        return $instance;
+    }
     protected function getIbw_Jobeet_Admin_CategoryService()
     {
         $instance = new \Ibw\JobeetBundle\Admin\CategoryAdmin('ibw.jobeet.admin.category', 'Ibw\\JobeetBundle\\Entity\\Category', 'IbwJobeetBundle:CategoryAdmin');
@@ -873,7 +895,7 @@ class appProdProjectContainer extends Container
         $j->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
         $k = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($i, array('login_path' => '/login', 'default_target_path' => 'ibw_jobeet_homepage', 'always_use_default_target_path' => false, 'target_path_parameter' => '_target_path', 'use_referer' => false));
         $k->setProviderKey('secured_area');
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($h, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.main')), 'secured_area', $a, $c), 2 => $j, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $i, 'secured_area', $k, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $i, array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $a), array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '539f0473448ba', $a), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $h, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $i, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $i, '/login', false), NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($h, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('security.user.provider.concrete.main')), 'secured_area', $a, $c), 2 => $j, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $i, 'secured_area', $k, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $i, array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $a), array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, NULL), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53a05cb76eebf', $a), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $h, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $i, 'secured_area', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $i, '/login', false), NULL, NULL, $a));
     }
     protected function getSecurity_Rememberme_ResponseListenerService()
     {
@@ -1162,9 +1184,9 @@ class appProdProjectContainer extends Container
     {
         $this->services['sonata.admin.pool'] = $instance = new \Sonata\AdminBundle\Admin\Pool($this, 'Jobeet Admin', 'bundles/sonataadmin/logo_title.png', array('html5_validate' => true, 'confirm_exit' => true, 'use_select2' => true, 'pager_links' => NULL));
         $instance->setTemplates(array('user_block' => 'SonataAdminBundle:Core:user_block.html.twig', 'layout' => 'SonataAdminBundle::standard_layout.html.twig', 'ajax' => 'SonataAdminBundle::ajax_layout.html.twig', 'dashboard' => 'SonataAdminBundle:Core:dashboard.html.twig', 'search' => 'SonataAdminBundle:Core:search.html.twig', 'list' => 'SonataAdminBundle:CRUD:list.html.twig', 'show' => 'SonataAdminBundle:CRUD:show.html.twig', 'edit' => 'SonataAdminBundle:CRUD:edit.html.twig', 'preview' => 'SonataAdminBundle:CRUD:preview.html.twig', 'history' => 'SonataAdminBundle:CRUD:history.html.twig', 'acl' => 'SonataAdminBundle:CRUD:acl.html.twig', 'history_revision_timestamp' => 'SonataAdminBundle:CRUD:history_revision_timestamp.html.twig', 'action' => 'SonataAdminBundle:CRUD:action.html.twig', 'select' => 'SonataAdminBundle:CRUD:list__select.html.twig', 'list_block' => 'SonataAdminBundle:Block:block_admin_list.html.twig', 'search_result_block' => 'SonataAdminBundle:Block:block_search_result.html.twig', 'short_object_description' => 'SonataAdminBundle:Helper:short-object-description.html.twig', 'delete' => 'SonataAdminBundle:CRUD:delete.html.twig', 'batch' => 'SonataAdminBundle:CRUD:list__batch.html.twig', 'batch_confirmation' => 'SonataAdminBundle:CRUD:batch_confirmation.html.twig', 'inner_list_row' => 'SonataAdminBundle:CRUD:list_inner_row.html.twig', 'base_list_field' => 'SonataAdminBundle:CRUD:base_list_field.html.twig', 'pager_links' => 'SonataAdminBundle:Pager:links.html.twig', 'pager_results' => 'SonataAdminBundle:Pager:results.html.twig'));
-        $instance->setAdminServiceIds(array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job'));
-        $instance->setAdminGroups(array('jobeet' => array('label' => 'jobeet', 'label_catalogue' => 'SonataAdminBundle', 'roles' => array(), 'items' => array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job'))));
-        $instance->setAdminClasses(array('Ibw\\JobeetBundle\\Entity\\Category' => array(0 => 'ibw.jobeet.admin.category'), 'Ibw\\JobeetBundle\\Entity\\Job' => array(0 => 'ibw.jobeet.admin.job')));
+        $instance->setAdminServiceIds(array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job', 2 => 'ibw.jobeet.admin.affiliate'));
+        $instance->setAdminGroups(array('jobeet' => array('label' => 'jobeet', 'label_catalogue' => 'SonataAdminBundle', 'roles' => array(), 'items' => array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job', 2 => 'ibw.jobeet.admin.affiliate'))));
+        $instance->setAdminClasses(array('Ibw\\JobeetBundle\\Entity\\Category' => array(0 => 'ibw.jobeet.admin.category'), 'Ibw\\JobeetBundle\\Entity\\Job' => array(0 => 'ibw.jobeet.admin.job'), 'Ibw\\JobeetBundle\\Entity\\Affiliate' => array(0 => 'ibw.jobeet.admin.affiliate')));
         return $instance;
     }
     protected function getSonata_Admin_Route_DefaultGeneratorService()
@@ -1181,7 +1203,7 @@ class appProdProjectContainer extends Container
     }
     protected function getSonata_Admin_RouteLoaderService()
     {
-        return $this->services['sonata.admin.route_loader'] = new \Sonata\AdminBundle\Route\AdminPoolLoader($this->get('sonata.admin.pool'), array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job'), $this);
+        return $this->services['sonata.admin.route_loader'] = new \Sonata\AdminBundle\Route\AdminPoolLoader($this->get('sonata.admin.pool'), array(0 => 'ibw.jobeet.admin.category', 1 => 'ibw.jobeet.admin.job', 2 => 'ibw.jobeet.admin.affiliate'), $this);
     }
     protected function getSonata_Admin_Search_HandlerService()
     {
@@ -1378,24 +1400,16 @@ class appProdProjectContainer extends Container
     {
         return $this->services['swiftmailer.mailer.default'] = new \Swift_Mailer($this->get('swiftmailer.mailer.default.transport'));
     }
-    protected function getSwiftmailer_Mailer_Default_SpoolService()
-    {
-        return $this->services['swiftmailer.mailer.default.spool'] = new \Swift_MemorySpool();
-    }
     protected function getSwiftmailer_Mailer_Default_TransportService()
     {
-        return $this->services['swiftmailer.mailer.default.transport'] = new \Swift_Transport_SpoolTransport($this->get('swiftmailer.mailer.default.transport.eventdispatcher'), $this->get('swiftmailer.mailer.default.spool'));
-    }
-    protected function getSwiftmailer_Mailer_Default_Transport_RealService()
-    {
         $a = new \Swift_Transport_Esmtp_AuthHandler(array(0 => $this->get('b65b62fa78dc52647ead8b1554d39d41f1a31aa9a574f6ce9bb604468491ef50_1'), 1 => $this->get('b65b62fa78dc52647ead8b1554d39d41f1a31aa9a574f6ce9bb604468491ef50_2'), 2 => $this->get('b65b62fa78dc52647ead8b1554d39d41f1a31aa9a574f6ce9bb604468491ef50_3')));
-        $a->setUsername(NULL);
-        $a->setPassword(NULL);
-        $a->setAuthMode(NULL);
-        $this->services['swiftmailer.mailer.default.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => $a), $this->get('swiftmailer.mailer.default.transport.eventdispatcher'));
-        $instance->setHost('127.0.0.1');
-        $instance->setPort(25);
-        $instance->setEncryption(NULL);
+        $a->setUsername('abutnar@pitechnologies.ro');
+        $a->setPassword('romaniamare1989');
+        $a->setAuthMode('login');
+        $this->services['swiftmailer.mailer.default.transport'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => $a), new \Swift_Events_SimpleEventDispatcher());
+        $instance->setHost('smtp.gmail.com');
+        $instance->setPort(465);
+        $instance->setEncryption('ssl');
         $instance->setTimeout(30);
         $instance->setSourceIp(NULL);
         return $instance;
@@ -1891,7 +1905,7 @@ class appProdProjectContainer extends Container
     }
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.main'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('539f0473448ba')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.main'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53a05cb76eebf')), true);
         $instance->setEventDispatcher($this->get('event_dispatcher'));
         return $instance;
     }
@@ -1923,10 +1937,6 @@ class appProdProjectContainer extends Container
         $instance->add('sonata.block.service.menu', 'sonata.block.service.menu', array());
         $instance->add('sonata.block.service.template', 'sonata.block.service.template', array());
         return $instance;
-    }
-    protected function getSwiftmailer_Mailer_Default_Transport_EventdispatcherService()
-    {
-        return $this->services['swiftmailer.mailer.default.transport.eventdispatcher'] = new \Swift_Events_SimpleEventDispatcher();
     }
     protected function getTemplating_LocatorService()
     {
@@ -1995,10 +2005,10 @@ class appProdProjectContainer extends Container
             'database_name' => 'jobeet',
             'database_user' => 'root',
             'database_password' => 'alternosfera511',
-            'mailer_transport' => 'smtp',
-            'mailer_host' => '127.0.0.1',
-            'mailer_user' => NULL,
-            'mailer_password' => NULL,
+            'mailer_transport' => 'gmail',
+            'mailer_host' => NULL,
+            'mailer_user' => 'abutnar@pitechnologies.ro',
+            'mailer_password' => 'romaniamare1989',
             'locale' => 'en',
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'debug_toolbar' => true,
@@ -2340,19 +2350,18 @@ class appProdProjectContainer extends Container
             'swiftmailer.data_collector.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\DataCollector\\MessageDataCollector',
             'swiftmailer.mailer.default.transport.name' => 'smtp',
             'swiftmailer.mailer.default.delivery.enabled' => true,
-            'swiftmailer.mailer.default.transport.smtp.encryption' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.port' => 25,
-            'swiftmailer.mailer.default.transport.smtp.host' => '127.0.0.1',
-            'swiftmailer.mailer.default.transport.smtp.username' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.password' => NULL,
-            'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL,
+            'swiftmailer.mailer.default.transport.smtp.encryption' => 'ssl',
+            'swiftmailer.mailer.default.transport.smtp.port' => 465,
+            'swiftmailer.mailer.default.transport.smtp.host' => 'smtp.gmail.com',
+            'swiftmailer.mailer.default.transport.smtp.username' => 'abutnar@pitechnologies.ro',
+            'swiftmailer.mailer.default.transport.smtp.password' => 'romaniamare1989',
+            'swiftmailer.mailer.default.transport.smtp.auth_mode' => 'login',
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
-            'swiftmailer.spool.default.memory.path' => '/var/www/jobeet/app/cache/prod/swiftmailer/spool/default',
-            'swiftmailer.mailer.default.spool.enabled' => true,
+            'swiftmailer.mailer.default.spool.enabled' => false,
             'swiftmailer.mailer.default.plugin.impersonate' => NULL,
             'swiftmailer.mailer.default.single_address' => NULL,
-            'swiftmailer.spool.enabled' => true,
+            'swiftmailer.spool.enabled' => false,
             'swiftmailer.delivery.enabled' => true,
             'swiftmailer.single_address' => NULL,
             'swiftmailer.mailers' => array(

@@ -11,13 +11,13 @@
             <div class="category_{{ category.slug }}">
                 <div class="category">
                     <div class="feed">
-                        <a href="">Feed</a>
+                        <a href="{{ path('IbwJobeetBundle_category', { 'slug': category.slug, '_format': 'atom' }) }}">Feed</a>
                     </div>
                     <h1><a href="{{ path('IbwJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.name }}</a></h1>
                 </div>
-                
-               {{ include ('IbwJobeetBundle:Job:list.html.twig', {'jobs': category.activejobs}) }}
-                
+
+                {{ include ('IbwJobeetBundle:Job:list.html.twig', {'jobs': category.activejobs}) }}
+
                 {% if category.morejobs %}
                     <div class="more_jobs">
                         and <a href="{{ path('IbwJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.morejobs }}</a>

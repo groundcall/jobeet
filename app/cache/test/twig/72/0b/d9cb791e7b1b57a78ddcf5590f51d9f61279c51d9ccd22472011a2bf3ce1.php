@@ -56,7 +56,10 @@ class __TwigTemplate_720bd9cb791e7b1b57a78ddcf5590f51d9f61279c51d9ccd22472011a2b
         // line 13
         echo "    <div class=\"category\">
         <div class=\"feed\">
-            <a href=\"\">Feed</a>
+            <a href=\"";
+        // line 15
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("IbwJobeetBundle_category", array("slug" => $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "slug"), "_format" => "atom")), "html", null, true);
+        echo "\">Feed</a>
         </div>
         <h1>";
         // line 17
@@ -182,6 +185,6 @@ class __TwigTemplate_720bd9cb791e7b1b57a78ddcf5590f51d9f61279c51d9ccd22472011a2b
 
     public function getDebugInfo()
     {
-        return array (  169 => 56,  161 => 54,  159 => 53,  154 => 51,  150 => 49,  143 => 45,  139 => 44,  133 => 41,  129 => 40,  126 => 39,  120 => 38,  112 => 36,  106 => 34,  103 => 33,  99 => 32,  93 => 29,  89 => 28,  83 => 25,  79 => 24,  76 => 23,  74 => 22,  69 => 20,  63 => 17,  57 => 13,  54 => 12,  48 => 9,  43 => 8,  40 => 7,  33 => 4,  30 => 3,);
+        return array (  172 => 56,  164 => 54,  162 => 53,  157 => 51,  153 => 49,  146 => 45,  142 => 44,  136 => 41,  132 => 40,  129 => 39,  123 => 38,  115 => 36,  109 => 34,  106 => 33,  102 => 32,  96 => 29,  92 => 28,  86 => 25,  82 => 24,  79 => 23,  77 => 22,  72 => 20,  66 => 17,  61 => 15,  57 => 13,  54 => 12,  48 => 9,  43 => 8,  40 => 7,  33 => 4,  30 => 3,);
     }
 }

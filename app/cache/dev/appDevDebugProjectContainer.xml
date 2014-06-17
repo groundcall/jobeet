@@ -36,10 +36,10 @@
     <parameter key="database_name">jobeet</parameter>
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">alternosfera511</parameter>
-    <parameter key="mailer_transport">smtp</parameter>
-    <parameter key="mailer_host">127.0.0.1</parameter>
-    <parameter key="mailer_user">null</parameter>
-    <parameter key="mailer_password">null</parameter>
+    <parameter key="mailer_transport">gmail</parameter>
+    <parameter key="mailer_host">smtp.loki.pitechnologies.ro</parameter>
+    <parameter key="mailer_user">abutnar@pitechnologies.ro</parameter>
+    <parameter key="mailer_password">xvatqavpdxfekjzx</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="debug_toolbar">true</parameter>
@@ -402,19 +402,18 @@
     <parameter key="swiftmailer.data_collector.class">Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector</parameter>
     <parameter key="swiftmailer.mailer.default.transport.name">smtp</parameter>
     <parameter key="swiftmailer.mailer.default.delivery.enabled">true</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.port">25</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.host">127.0.0.1</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.username">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.password">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">ssl</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.port">465</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.host">smtp.gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.username">abutnar@pitechnologies.ro</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.password">xvatqavpdxfekjzx</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">login</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
-    <parameter key="swiftmailer.spool.default.memory.path">/var/www/jobeet/app/cache/dev/swiftmailer/spool/default</parameter>
-    <parameter key="swiftmailer.mailer.default.spool.enabled">true</parameter>
+    <parameter key="swiftmailer.mailer.default.spool.enabled">false</parameter>
     <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
     <parameter key="swiftmailer.mailer.default.single_address">null</parameter>
-    <parameter key="swiftmailer.spool.enabled">true</parameter>
+    <parameter key="swiftmailer.spool.enabled">false</parameter>
     <parameter key="swiftmailer.delivery.enabled">true</parameter>
     <parameter key="swiftmailer.single_address">null</parameter>
     <parameter key="swiftmailer.mailers" type="collection">
@@ -2929,7 +2928,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>539f0366c2e20</argument>
+            <argument>53a0606512713</argument>
           </service>
         </argument>
       </argument>
@@ -3183,7 +3182,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>539f0366c2e20</argument>
+            <argument>53a0606512713</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -3476,7 +3475,6 @@
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="service_container"/>
     </service>
-    <service id="swiftmailer.mailer.default.transport.eventdispatcher" class="Swift_Events_SimpleEventDispatcher" public="false"/>
     <service id="swiftmailer.mailer.default" class="Swift_Mailer">
       <argument type="service" id="swiftmailer.mailer.default.transport"/>
     </service>
@@ -3956,6 +3954,102 @@
         </argument>
       </call>
     </service>
+    <service id="ibw.jobeet.admin.affiliate" class="Ibw\JobeetBundle\Admin\AffiliateAdmin" scope="prototype">
+      <tag name="sonata.admin" manager_type="orm" group="jobeet" label="Affiliates"/>
+      <argument>ibw.jobeet.admin.affiliate</argument>
+      <argument>Ibw\JobeetBundle\Entity\Affiliate</argument>
+      <argument>IbwJobeetBundle:AffiliateAdmin</argument>
+      <call method="setManagerType">
+        <argument>orm</argument>
+      </call>
+      <call method="setModelManager">
+        <argument type="service" id="sonata.admin.manager.orm"/>
+      </call>
+      <call method="setFormContractor">
+        <argument type="service" id="sonata.admin.builder.orm_form"/>
+      </call>
+      <call method="setShowBuilder">
+        <argument type="service" id="sonata.admin.builder.orm_show"/>
+      </call>
+      <call method="setListBuilder">
+        <argument type="service" id="sonata.admin.builder.orm_list"/>
+      </call>
+      <call method="setDatagridBuilder">
+        <argument type="service" id="sonata.admin.builder.orm_datagrid"/>
+      </call>
+      <call method="setTranslator">
+        <argument type="service" id="translator.default"/>
+      </call>
+      <call method="setConfigurationPool">
+        <argument type="service" id="sonata.admin.pool"/>
+      </call>
+      <call method="setRouteGenerator">
+        <argument type="service" id="sonata.admin.route.default_generator"/>
+      </call>
+      <call method="setValidator">
+        <argument type="service" id="validator"/>
+      </call>
+      <call method="setSecurityHandler">
+        <argument type="service" id="sonata.admin.security.handler"/>
+      </call>
+      <call method="setMenuFactory">
+        <argument type="service" id="knp_menu.factory"/>
+      </call>
+      <call method="setRouteBuilder">
+        <argument type="service" id="sonata.admin.route.path_info"/>
+      </call>
+      <call method="setLabelTranslatorStrategy">
+        <argument type="service" id="sonata.admin.label.strategy.native"/>
+      </call>
+      <call method="setLabel">
+        <argument>Affiliates</argument>
+      </call>
+      <call method="setPersistFilters">
+        <argument>false</argument>
+      </call>
+      <call method="setTemplates">
+        <argument type="collection">
+          <argument key="user_block">SonataAdminBundle:Core:user_block.html.twig</argument>
+          <argument key="layout">SonataAdminBundle::standard_layout.html.twig</argument>
+          <argument key="ajax">SonataAdminBundle::ajax_layout.html.twig</argument>
+          <argument key="dashboard">SonataAdminBundle:Core:dashboard.html.twig</argument>
+          <argument key="list">SonataAdminBundle:CRUD:list.html.twig</argument>
+          <argument key="show">SonataAdminBundle:CRUD:show.html.twig</argument>
+          <argument key="edit">SonataAdminBundle:CRUD:edit.html.twig</argument>
+          <argument key="history">SonataAdminBundle:CRUD:history.html.twig</argument>
+          <argument key="history_revision_timestamp">SonataAdminBundle:CRUD:history_revision_timestamp.html.twig</argument>
+          <argument key="acl">SonataAdminBundle:CRUD:acl.html.twig</argument>
+          <argument key="action">SonataAdminBundle:CRUD:action.html.twig</argument>
+          <argument key="short_object_description">SonataAdminBundle:Helper:short-object-description.html.twig</argument>
+          <argument key="preview">SonataAdminBundle:CRUD:preview.html.twig</argument>
+          <argument key="list_block">SonataAdminBundle:Block:block_admin_list.html.twig</argument>
+          <argument key="delete">SonataAdminBundle:CRUD:delete.html.twig</argument>
+          <argument key="batch">SonataAdminBundle:CRUD:list__batch.html.twig</argument>
+          <argument key="select">SonataAdminBundle:CRUD:list__select.html.twig</argument>
+          <argument key="batch_confirmation">SonataAdminBundle:CRUD:batch_confirmation.html.twig</argument>
+          <argument key="inner_list_row">SonataAdminBundle:CRUD:list_inner_row.html.twig</argument>
+          <argument key="base_list_field">SonataAdminBundle:CRUD:base_list_field.html.twig</argument>
+          <argument key="pager_links">SonataAdminBundle:Pager:links.html.twig</argument>
+          <argument key="pager_results">SonataAdminBundle:Pager:results.html.twig</argument>
+          <argument key="search">SonataAdminBundle:Core:search.html.twig</argument>
+          <argument key="search_result_block">SonataAdminBundle:Block:block_search_result.html.twig</argument>
+        </argument>
+      </call>
+      <call method="setSecurityInformation">
+        <argument type="collection"/>
+      </call>
+      <call method="initialize"/>
+      <call method="setFormTheme">
+        <argument type="collection">
+          <argument>SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig</argument>
+        </argument>
+      </call>
+      <call method="setFilterTheme">
+        <argument type="collection">
+          <argument>SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig</argument>
+        </argument>
+      </call>
+    </service>
     <service id="sonata.admin.twig.extension" class="Sonata\AdminBundle\Twig\Extension\SonataAdminExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="sonata.admin.pool"/>
@@ -4002,6 +4096,7 @@
         <argument type="collection">
           <argument>ibw.jobeet.admin.category</argument>
           <argument>ibw.jobeet.admin.job</argument>
+          <argument>ibw.jobeet.admin.affiliate</argument>
         </argument>
       </call>
       <call method="setAdminGroups">
@@ -4013,6 +4108,7 @@
             <argument key="items" type="collection">
               <argument>ibw.jobeet.admin.category</argument>
               <argument>ibw.jobeet.admin.job</argument>
+              <argument>ibw.jobeet.admin.affiliate</argument>
             </argument>
           </argument>
         </argument>
@@ -4025,6 +4121,9 @@
           <argument key="Ibw\JobeetBundle\Entity\Job" type="collection">
             <argument>ibw.jobeet.admin.job</argument>
           </argument>
+          <argument key="Ibw\JobeetBundle\Entity\Affiliate" type="collection">
+            <argument>ibw.jobeet.admin.affiliate</argument>
+          </argument>
         </argument>
       </call>
     </service>
@@ -4034,6 +4133,7 @@
       <argument type="collection">
         <argument>ibw.jobeet.admin.category</argument>
         <argument>ibw.jobeet.admin.job</argument>
+        <argument>ibw.jobeet.admin.affiliate</argument>
       </argument>
       <argument type="service" id="service_container"/>
     </service>
@@ -4978,15 +5078,7 @@
         <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
-    <service id="swiftmailer.mailer.default.transport" class="Swift_Transport_SpoolTransport">
-      <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
-      <argument type="service" id="swiftmailer.mailer.default.spool"/>
-      <call method="registerPlugin">
-        <argument type="service" id="swiftmailer.mailer.default.plugin.messagelogger"/>
-      </call>
-    </service>
-    <service id="swiftmailer.mailer.default.spool" class="Swift_MemorySpool"/>
-    <service id="swiftmailer.mailer.default.transport.real" class="Swift_Transport_EsmtpTransport">
+    <service id="swiftmailer.mailer.default.transport" class="Swift_Transport_EsmtpTransport">
       <argument type="service">
         <service class="Swift_Transport_StreamBuffer" public="false">
           <argument type="service">
@@ -5003,32 +5095,37 @@
               <argument type="service" id="b65b62fa78dc52647ead8b1554d39d41f1a31aa9a574f6ce9bb604468491ef50_3"/>
             </argument>
             <call method="setUsername">
-              <argument>null</argument>
+              <argument>abutnar@pitechnologies.ro</argument>
             </call>
             <call method="setPassword">
-              <argument>null</argument>
+              <argument>xvatqavpdxfekjzx</argument>
             </call>
             <call method="setAuthMode">
-              <argument>null</argument>
+              <argument>login</argument>
             </call>
           </service>
         </argument>
       </argument>
-      <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
+      <argument type="service">
+        <service class="Swift_Events_SimpleEventDispatcher" public="false"/>
+      </argument>
       <call method="setHost">
-        <argument>127.0.0.1</argument>
+        <argument>smtp.gmail.com</argument>
       </call>
       <call method="setPort">
-        <argument>25</argument>
+        <argument>465</argument>
       </call>
       <call method="setEncryption">
-        <argument>null</argument>
+        <argument>ssl</argument>
       </call>
       <call method="setTimeout">
         <argument>30</argument>
       </call>
       <call method="setSourceIp">
         <argument>null</argument>
+      </call>
+      <call method="registerPlugin">
+        <argument type="service" id="swiftmailer.mailer.default.plugin.messagelogger"/>
       </call>
     </service>
     <service id="sonata.admin.security.handler" class="Sonata\AdminBundle\Security\Handler\NoopSecurityHandler"/>
@@ -5055,8 +5152,6 @@
     <service id="session.storage" alias="session.storage.native"/>
     <service id="translator" alias="translator.default"/>
     <service id="debug.templating.engine.twig" alias="templating"/>
-    <service id="swiftmailer.spool" alias="swiftmailer.mailer.default.spool"/>
-    <service id="swiftmailer.transport.real" alias="swiftmailer.mailer.default.transport.real"/>
     <service id="swiftmailer.plugin.messagelogger" alias="swiftmailer.mailer.default.plugin.messagelogger"/>
     <service id="swiftmailer.mailer" alias="swiftmailer.mailer.default"/>
     <service id="swiftmailer.transport" alias="swiftmailer.mailer.default.transport"/>

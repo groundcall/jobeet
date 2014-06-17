@@ -55,7 +55,10 @@ class __TwigTemplate_14274cb3363707931f08d791a235dcb2d497790350acbb2a37d360f7e5c
             echo "\">
                 <div class=\"category\">
                     <div class=\"feed\">
-                        <a href=\"\">Feed</a>
+                        <a href=\"";
+            // line 14
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("IbwJobeetBundle_category", array("slug" => $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "slug"), "_format" => "atom")), "html", null, true);
+            echo "\">Feed</a>
                     </div>
                     <h1><a href=\"";
             // line 16
@@ -64,12 +67,12 @@ class __TwigTemplate_14274cb3363707931f08d791a235dcb2d497790350acbb2a37d360f7e5c
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "name"), "html", null, true);
             echo "</a></h1>
                 </div>
-                
-               ";
+
+                ";
             // line 19
             echo twig_include($this->env, $context, "IbwJobeetBundle:Job:list.html.twig", array("jobs" => $this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "activejobs")));
             echo "
-                
+
                 ";
             // line 21
             if ($this->getAttribute((isset($context["category"]) ? $context["category"] : $this->getContext($context, "category")), "morejobs")) {
@@ -109,6 +112,6 @@ class __TwigTemplate_14274cb3363707931f08d791a235dcb2d497790350acbb2a37d360f7e5c
 
     public function getDebugInfo()
     {
-        return array (  96 => 29,  89 => 27,  80 => 23,  77 => 22,  75 => 21,  70 => 19,  62 => 16,  53 => 11,  49 => 10,  46 => 9,  43 => 8,  37 => 5,  32 => 4,  29 => 3,);
+        return array (  99 => 29,  92 => 27,  83 => 23,  80 => 22,  78 => 21,  73 => 19,  65 => 16,  60 => 14,  53 => 11,  49 => 10,  46 => 9,  43 => 8,  37 => 5,  32 => 4,  29 => 3,);
     }
 }
