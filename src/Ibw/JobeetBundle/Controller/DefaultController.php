@@ -30,4 +30,22 @@ class DefaultController extends Controller {
         ));
     }
 
+    public function changeLanguageAction() {
+        $request = $this->getRequest();
+        $language = $this->getRequest()->get('language');
+        $referer = $request->headers->get('referer');
+        $locales = implode('|', $this->getLocales());
+        $url = preg_replace('/\/(' . $locales . ')\//', '/' . $language . '/', $referer, 1);
+        return $this->redirect($url);
+
+//       Original code:
+//        $language = $this->getRequest()->get('language');
+//        return $this->redirect($this->generateUrl('ibw_jobeet_homepage', array('_locale' => $language)));
+//    End
+    }
+
+    private function getLocales() {
+        return array('fr', 'en');
+    }
+
 }
