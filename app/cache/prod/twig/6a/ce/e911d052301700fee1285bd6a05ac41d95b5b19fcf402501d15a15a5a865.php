@@ -273,7 +273,7 @@ class __TwigTemplate_6acee911d052301700fee1285bd6a05ac41d95b5b19fcf402501d15a15a
     {
         // line 15
         echo "            <script type=\"text/javascript\" src=\"";
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ibwjobeet/js/jquery-2.0.3.min.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/ibwjobeet/js/jquery-2.1.1.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 16
