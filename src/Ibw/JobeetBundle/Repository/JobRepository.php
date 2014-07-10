@@ -121,7 +121,7 @@ class JobRepository extends EntityRepository {
 
     public function getForLuceneQuery($query) {
         $hits = Job::getLuceneIndex()->find($query);
-
+//        var_dump($hits);
         $pks = array();
         foreach ($hits as $hit) {
             $pks[] = $hit->pk;
